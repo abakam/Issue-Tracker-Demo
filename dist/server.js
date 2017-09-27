@@ -27,6 +27,7 @@ _sourceMapSupport2.default.install();
 //Necessary for Node.js to report line numbers of source file instead of the compiled file
 
 
+const port = process.env.PORT || 3000;
 const app = (0, _express2.default)();
 app.use(_express2.default.static('static'));
 app.use(_bodyParser2.default.json());
@@ -78,10 +79,10 @@ app.post('/api/issues', (req, res) => {
     });
 });
 
-_mongodb.MongoClient.connect('mongodb://localhost/issuetracker').then(connection => {
+_mongodb.MongoClient.connect(process.env.MONGODB_URI || 'mongodb://localhost/issuetracker').then(connection => {
     db = connection;
-    app.listen(3000, () => {
-        console.log('App started on port 3000');
+    app.listen(port, () => {
+        console.log(`App started on port ${port}`);
     });
 }).catch(err => {
     console.log('ERROR:', err);
