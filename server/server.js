@@ -8,10 +8,11 @@ import 'babel-polyfill';
 import SourceMapSupport from 'source-map-support';
 SourceMapSupport.install();
 
-
+const port = process.env.PORT || 3000;
 const app = express();
 app.use(express.static('static'));
 app.use(bodyParser.json());
+
 
 // if(process.env.NODE_ENV !== 'production'){
 //     const webpack = require('webpack');
@@ -64,10 +65,10 @@ app.post('/api/issues', (req, res) => {
 
 
 
-MongoClient.connect('mongodb://localhost/issuetracker').then(connection => {
+MongoClient.connect(process.env.MONGODB_URI || 'mongodb://localhost/issuetracker').then(connection => {
     db = connection;
-    app.listen(3000, () => {
-        console.log('App started on port 3000');
+    app.listen(port, () => {
+        console.log(`App started on port ${port}`);
     });
 }).catch(err => {
     console.log('ERROR:', err);

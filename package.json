@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "compile": "webpack",
     "watch": "webpack-dev-server --hot --inline",
-    "start": "nodemon -w server dist/server.js",
+    "start": "node dist/server.js",
     "start-hook": "nodemon -w server server/start_hook.js",
     "compile-server": "babel server --presets es2015-node --out-dir dist --source-maps",
     "watch-server": "babel server --presets es2015-node --out-dir dist --source-maps --watch",
